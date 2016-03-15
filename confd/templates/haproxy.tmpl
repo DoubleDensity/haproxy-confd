@@ -61,7 +61,7 @@ backend {{$service}}
 {{range $name := ls "/tcp-services"}}
 listen {{$name}}
     mode tcp
-    bind *:{{printf "/tcp-services/%s/ports" $name | getv}}
+    bind {{printf "/tcp-services/%s/ports" $name | getv}}
     {{range $upstream := ls (printf "/tcp-services/%s/upstreams" $name)}}
     server {{$upstream}} {{printf "/tcp-services/%s/upstreams/%s" $name $upstream | getv}} check
     {{end}}
