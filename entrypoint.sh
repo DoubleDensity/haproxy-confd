@@ -21,7 +21,7 @@ function config_fail()
 # Loop until confd has updated the haproxy config
 n=0
 until confd -onetime -node "$ETCD_NODE"; do
-  if [ "$n" -eq "4" ];  then config_fail; fi
+  if [ "$n" -eq "400" ];  then config_fail; fi
   echo "[haproxy-confd] waiting for confd to refresh haproxy.cfg"
   n=$((n+1))
   sleep $n
