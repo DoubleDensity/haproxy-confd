@@ -24,6 +24,6 @@ RUN wget --progress=bar:force --retry-connrefused -t 5 https://github.com/kelsey
 
 ADD entrypoint.sh /entrypoint.sh
 ADD confd /etc/confd
-	
+
 # Expose ports.
 EXPOSE 8080
