@@ -19,8 +19,9 @@ defaults
     option forwardfor
     option http-keep-alive
     option http-tunnel
+    option tcpka
     timeout connect 5000
-    timeout client 50000
+    timeout client 5m
     timeout server 50000
     errorfile 400 /etc/haproxy/errors/400.http
     errorfile 403 /etc/haproxy/errors/403.http
@@ -61,7 +62,6 @@ backend {{$service}}
 {{range $name := ls "/tcp-services"}}
 listen {{$name}}
     mode tcp
-    timeout client 5m
     bind {{printf "/tcp-services/%s/ports" $name | getv}}
     {{range $upstream := ls (printf "/tcp-services/%s/upstreams" $name)}}
     server {{$upstream}} {{printf "/tcp-services/%s/upstreams/%s" $name $upstream | getv}} check
